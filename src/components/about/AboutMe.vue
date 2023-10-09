@@ -6,12 +6,7 @@ export default {
 				{
 					id: 1,
 					bio:
-						'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nihil vel illum asperiores dignissimos cumque quibusdam et fugiat voluptatem nobis suscipit explicabo, eaque consequatur nesciunt, fugit eligendi corporis laudantium adipisci soluta? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Incidunt totam dolorum, ducimus obcaecati, voluptas facilis molestias nobis ut quam natus similique inventore excepturi optio ipsa deleniti fugit illo. Unde, amet! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum illo necessitatibus perspiciatis! Aperiam perferendis labore temporibus, eos culpa corporis recusandae quas, fuga voluptatibus nesciunt odit libero tenetur neque consequatur ea.',
-				},
-				{
-					id: 2,
-					bio:
-						'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nihil vel illum asperiores dignissimos cumque quibusdam et fugiat voluptatem nobis suscipit explicabo, eaque consequatur nesciunt, fugit eligendi corporis laudantium adipisci soluta?',
+						'I am Joseph Edomobi, a self-taught web developer and software engineer with a strong passion for building exceptional websites. I have invested a significant amount of time and effort into learning web development skills and techniques. Through online courses, tutorials, and practical projects, I have gained the knowledge and experience necessary to create secured , beautiful, functional, and user-friendly websites. As a web developer, My commitment to ongoing education and professional development ensures that I stay up-to-date with the latest trends and advancements in the web development industry. My goal is to create websites that not only look great and secured as possible but also provide a seamless user experience. I take pride in my attention to detail and dedication to delivering high-quality and secured work.',
 				},
 			],
 		};
@@ -21,22 +16,12 @@ export default {
 
 <template>
 	<div class="block sm:flex sm:gap-10 mt-10 sm:mt-20">
-		<!-- About profile image -->
-		<div class="w-full sm:w-1/4 mb-7 sm:mb-0">
-			<img
-				src="@/assets/images/profile.jpeg"
-				class="rounded-xl w-96"
-				alt=""
-			/>
-		</div>
+
 
 		<!-- About details -->
-		<div class="w-full sm:w-3/4 text-left">
-			<p
-				v-for="bio in bios"
-				:key="bio.id"
-				class="font-general-regular mb-4 text-ternary-dark dark:text-ternary-light text-lg"
-			>
+		<div class="w-full sm:w-4/4 text-left">
+			<p v-for="bio in bios" :key="bio.id"
+				class="font-general-regular mb-4 text-ternary-dark dark:text-ternary-light text-lg">
 				{{ bio.bio }}
 			</p>
 		</div>

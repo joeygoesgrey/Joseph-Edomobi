@@ -1,189 +1,141 @@
 <script>
-import feather from 'feather-icons';
-import ProjectHeader from '../components/projects/ProjectHeader.vue';
-import ProjectGallery from '../components/projects/ProjectGallery.vue';
-import ProjectInfo from '../components/projects/ProjectInfo.vue';
-import ProjectRelatedProjects from '../components/projects/ProjectRelatedProjects.vue';
+import { getPortfolioByTitle, API_BASE_URL } from '../data/projects';
+import { ref, onMounted } from 'vue';
+import { useRoute } from 'vue-router';
 
 export default {
 	name: 'Projects',
-	components: {
-		ProjectHeader,
-		ProjectGallery,
-		ProjectInfo,
-		ProjectRelatedProjects,
-	},
-	data: () => {
+	setup() {
+		const projects = ref(null);
+		const route = useRoute();
+
+		const removeLineBreaksFromAllKeys = (dataArray) => {
+			return dataArray.map(item => {
+				Object.keys(item).forEach(key => {
+					if (typeof item[key] === 'string') {
+						item[key] = item[key].replace(/\r\n/g, ' ');
+					}
+				});
+				return item;
+			});
+		};
+
+		const fetchProjectData = async () => {
+			const projectStr = route.params.str;
+
+			try {
+				const data = await getPortfolioByTitle(projectStr);
+
+				if (data) {
+					projects.value = removeLineBreaksFromAllKeys(data)[0];
+					console.log('Processed projects:', projects.value);
+				}
+			} catch (error) {
+				console.error('An error occurred:', error);
+			}
+		};
+
+		onMounted(() => {
+			fetchProjectData();
+		});
+
+
 		return {
-			singleProjectHeader: {
-				singleProjectTitle: 'Project Management UI',
-				singleProjectDate: 'Jul 26, 2021',
-				singleProjectTag: 'UI / Frontend',
-			},
-			projectImages: [
-				{
-					id: 1,
-					title: 'Kabul Project Management UI',
-					img: require('@/assets/images/ui-project-1.jpg'),
-				},
-				{
-					id: 2,
-					title: 'Kabul Project Management UI',
-					img: require('@/assets/images/web-project-2.jpg'),
-				},
-				{
-					id: 3,
-					title: 'Kabul Project Management UI',
-					img: require('@/assets/images/mobile-project-2.jpg'),
-				},
-			],
-			projectInfo: {
-				clientHeading: 'About Client',
-				companyInfos: [
-					{
-						id: 1,
-						title: 'Name',
-						details: 'Company Ltd',
-					},
-					{
-						id: 2,
-						title: 'Services',
-						details: 'UI Design & Frontend Development',
-					},
-					{
-						id: 3,
-						title: 'Website',
-						details: 'https://company.com',
-					},
-					{
-						id: 4,
-						title: 'Phone',
-						details: '555 8888 888',
-					},
-				],
-				objectivesHeading: 'Objective',
-				objectivesDetails:
-					'Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio, natus! Quibusdam enim quod in esse, mollitia molestias incidunt quas ipsa accusamus veniam.',
-				technologies: [
-					{
-						title: 'Tools & Technologies',
-						techs: [
-							'HTML',
-							'CSS',
-							'JavaScript',
-							'Vue.js',
-							'TailwindCSS',
-							'AdobeXD',
-						],
-					},
-				],
-				projectDetailsHeading: 'Challenge',
-				projectDetails: [
-					{
-						id: 1,
-						details:
-							'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nihil vel illum asperiores dignissimos cumque quibusdam et fugiat voluptatem nobis suscipit explicabo, eaque consequatur nesciunt, fugit eligendi corporis laudantium adipisci soluta? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Incidunt totam dolorum, ducimus obcaecati, voluptas facilis molestias nobis ut quam natus similique inventore excepturi optio ipsa deleniti fugit illo. Unde, amet! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum illo necessitatibus perspiciatis! Aperiam perferendis labore temporibus, eos culpa corporis recusandae quas, fuga voluptatibus nesciunt odit libero tenetur neque consequatur ea.',
-					},
-					{
-						id: 2,
-						details:
-							'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nihil vel illum asperiores dignissimos cumque quibusdam et fugiat voluptatem nobis suscipit explicabo, eaque consequatur nesciunt, fugit eligendi corporis laudantium adipisci soluta?',
-					},
-					{
-						id: 3,
-						details:
-							'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nihil vel illum asperiores dignissimos cumque quibusdam et fugiat voluptatem nobis suscipit explicabo, eaque consequatur nesciunt, fugit eligendi corporis laudantium adipisci soluta?',
-					},
-					{
-						id: 4,
-						details:
-							'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nihil vel illum asperiores dignissimos cumque quibusdam et fugiat voluptatem nobis suscipit explicabo, eaque consequatur nesciunt, fugit eligendi corporis laudantium adipisci soluta? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Incidunt totam dolorum, ducimus obcaecati, voluptas facilis molestias nobis ut quam natus similique inventore excepturi optio ipsa deleniti fugit illo. Unde, amet! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum illo necessitatibus perspiciatis! Aperiam perferendis labore temporibus, eos culpa corporis recusandae quas, fuga voluptatibus nesciunt odit libero tenetur neque consequatur ea.',
-					},
-				],
-				socialSharingsHeading: 'Share This',
-				socialSharings: [
-					{
-						id: 1,
-						name: 'Twitter',
-						icon: 'twitter',
-						url: 'https://twitter.com/realstoman',
-					},
-					{
-						id: 2,
-						name: 'Instagram',
-						icon: 'instagram',
-						url: 'https://instagram.com/realstoman',
-					},
-					{
-						id: 3,
-						name: 'Facebook',
-						icon: 'facebook',
-						url: 'https://facebook.com/',
-					},
-					{
-						id: 4,
-						name: 'LinkedIn',
-						icon: 'linkedin',
-						url: 'https://linkedin.com/',
-					},
-					{
-						id: 5,
-						name: 'Youtube',
-						icon: 'youtube',
-						url: 'https://www.youtube.com/c/StomanStudio',
-					},
-				],
-			},
-			relatedProject: {
-				relatedProjectsHeading: 'Related Projects',
-				relatedProjects: [
-					{
-						id: 1,
-						title: 'Mobile UI',
-						img: require('@/assets/images/mobile-project-1.jpg'),
-					},
-					{
-						id: 2,
-						title: 'Web Application',
-						img: require('@/assets/images/web-project-1.jpg'),
-					},
-					{
-						id: 3,
-						title: 'UI Design',
-						img: require('@/assets/images/ui-project-2.jpg'),
-					},
-					{
-						id: 4,
-						title: 'Kabul Mobile App UI',
-						img: require('@/assets/images/mobile-project-2.jpg'),
-					},
-				],
-			},
+			projects,
+			removeLineBreaksFromAllKeys,
+			fetchProjectData,
+			API_BASE_URL
 		};
 	},
-	mounted() {
-		feather.replace();
-	},
-	updated() {
-		feather.replace();
-	},
-	methods: {},
+
 };
 </script>
 
 <template>
 	<div class="container mx-auto mt-10 sm:mt-20">
-		<!-- Project header -->
-		<ProjectHeader :singleProjectHeader="singleProjectHeader" />
+		<div>
+			<p
+				class="font-general-medium  text-left text-3xl sm:text-4xl font-bold text-primary-dark dark:text-primary-light mt-14 sm:mt-20 mb-7">
+				{{ projects?.project_name }}
+			</p>
+			<div class="flex">
+				<div class="flex items-center mr-10">
+					<i data-feather="clock" class="w-4 h-4 text-ternary-dark dark:text-ternary-light"></i>
+					<span class="font-general-medium ml-2 leading-none text-primary-dark dark:text-primary-light">{{
+						projects?.date }}</span>
+				</div>
+				<div class="flex items-center">
+					<i data-feather="tag" class="w-4 h-4 text-ternary-dark dark:text-ternary-light"></i>
+					<span class="font-general-medium ml-2 leading-none text-primary-dark dark:text-primary-light"><i
+							class="bi bi-tag"></i>
+						{{
+							projects?.project_tag }}</span>
+				</div>
+			</div>
+		</div>
+		<div class="grid grid-cols-1 sm:grid-cols-3 sm:gap-10 mt-12">
+			<div class="mb-10 sm:mb-0" v-for="projectImage in projects?.image_files" :key="projectImage">
+				<!-- {{ projectImage }} -->
+				<img :src="`${API_BASE_URL}/static/images/${projectImage}`" v-if="projectImage"
+					class="rounded-xl cursor-pointer shadow-lg sm:shadow-none" alt="{{ projectImage.title }}" />
+			</div>
+		</div>
 
-		<!-- Project gallery -->
-		<ProjectGallery :projectImages="projectImages" />
 
 		<!-- Project information -->
-		<ProjectInfo :projectInfo="projectInfo" />
+		<div class="block sm:flex gap-0 sm:gap-10 mt-14">
+			<!-- Single project left section details -->
+			<div class="w-full sm:w-1/3 text-left">
 
-		<!-- Project related projects -->
-		<ProjectRelatedProjects :relatedProject="relatedProject" />
+				<!-- Single project objectives -->
+				<div class="mb-7">
+					<p class="font-general-medium text-2xl text-ternary-dark dark:text-ternary-light mb-2">
+						Objectives
+					</p>
+					<p class="font-general-regular text-primary-dark dark:text-ternary-light">
+						{{ projects?.objective }}
+					</p>
+				</div>
+
+				<!-- Single project technologies -->
+				<div class="mb-7">
+					<p class="font-general-medium text-2xl text-ternary-dark dark:text-ternary-light mb-2">
+						Tools and Technologies
+					</p>
+					<p v-html="projects?.tools_and_technology"
+						class="font-general-regular text-primary-dark dark:text-ternary-light">
+					</p>
+				</div>
+
+				<!-- Single project social sharing -->
+				<div>
+					<p class="font-general-medium text-2xl text-ternary-dark dark:text-ternary-light mb-2">
+						Extras
+					</p>
+					<div class="flex items-center gap-3 mt-5">
+						<a target="__blank" aria-label="Share Project" :href="projects?.repo_link"
+							class="bg-ternary-light dark:bg-ternary-dark text-gray-400 hover:text-primary-dark dark:hover:text-primary-light p-2 rounded-lg shadow-sm duration-500"><i
+								class="bi bi-github w-4 lg:w-5 h-4 lg:h-5"></i></a>
+						<a target="__blank" aria-label="Share Project" :href="projects?.url"
+							class="bg-ternary-light dark:bg-ternary-dark text-gray-400 hover:text-primary-dark dark:hover:text-primary-light p-2 rounded-lg shadow-sm duration-500"><i
+								class="bi bi-globe w-4 lg:w-5 h-4 lg:h-5"></i></a>
+					</div>
+				</div>
+			</div>
+
+			<!-- Single project right section details -->
+			<div class="w-full sm:w-2/3 text-left mt-10 sm:mt-0">
+				<p class="font-general-medium text-primary-dark dark:text-primary-light text-2xl font-bold mb-7">
+					Information
+				</p>
+				<p v-html="projects?.description"
+					class="font-general-regular mb-5 text-lg text-ternary-dark dark:text-ternary-light">
+
+
+				</p>
+			</div>
+		</div>
+
 	</div>
 </template>
 

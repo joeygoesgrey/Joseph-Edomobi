@@ -1,43 +1,29 @@
-// Projects data.
-// Note: Here we are getting data from a js file, but in a different project I'll be fetching these projects from some srt of APIs.
+const API_BASE_URL = "http://127.0.0.1:8000"
+import axios from 'axios';
 
-const projects = [
-	{
-		id: 1,
-		title: 'Google Health Platform',
-		category: 'Web Application',
-		img: require('@/assets/images/web-project-2.jpg'),
-	},
-	{
-		id: 2,
-		title: 'Phoenix Digital Agency',
-		category: 'Mobile Application',
-		img: require('@/assets/images/mobile-project-2.jpg'),
-	},
-	{
-		id: 3,
-		title: 'Project Management UI',
-		category: 'UI/UX Design',
-		img: require('@/assets/images/ui-project-1.jpg'),
-	},
-	{
-		id: 4,
-		title: 'Cloud Storage Platform',
-		category: 'UI/UX Design',
-		img: require('@/assets/images/ui-project-2.jpg'),
-	},
-	{
-		id: 5,
-		title: 'React Social App',
-		category: 'Mobile Application',
-		img: require('@/assets/images/mobile-project-1.jpg'),
-	},
-	{
-		id: 6,
-		title: 'Apple Design System',
-		category: 'Web Application',
-		img: require('@/assets/images/web-project-1.jpg'),
-	},
-];
+const getPortfolioByTitle = async (title) => {
+	try {
+		const response = await axios.get(`${API_BASE_URL}/portfolio/${title}`);
+		return response.data;
+	} catch (error) {
+		console.error(`Error fetching portfolio by ID: ${error}`);
+		return null;
+	}
+};
 
-export default projects;
+const getProjects = async () => {
+	try {
+		const response = await axios.get(`${API_BASE_URL}/projects`);
+		return response.data;
+	} catch (error) {
+		console.error(`Error fetching portfolio by ID: ${error}`);
+		return null;
+	}
+};
+
+export default API_BASE_URL;
+export {
+	API_BASE_URL,
+	getPortfolioByTitle,
+	getProjects,
+}
