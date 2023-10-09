@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://127.0.0.1:8000"
+const API_BASE_URL = "https://portfolio-b5d7.onrender.com"
 import axios from 'axios';
 
 const getPortfolioByTitle = async (title) => {
