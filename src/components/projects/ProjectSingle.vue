@@ -44,7 +44,7 @@ export default {
 						</a>
 					</button>
 					<div class="mx-4">
-						<a :href="`${project?.portfolio_url}`" target="__blank">
+						<a :href="project?.portfolio_url" target="__blank">
 							<i class="bi bi-globe mx-2"></i>
 							Live
 						</a>
