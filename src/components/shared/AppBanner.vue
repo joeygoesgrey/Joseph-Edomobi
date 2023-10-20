@@ -38,12 +38,12 @@ export default {
 				class="font-general-medium mt-2 text-lg sm:text-xl  xl:text-2xl text-center sm:text-left leading-none text-gray-400">
 				Writing Code, Chasing Bugs, Shaking My Head, and Laughing It Off 😂😂😂😂 </p>
 			<div class="flex sm:block">
-		 
 				<a href="https://josephedomobi777.hackerresume.io/769f60b8-6625-40f5-bb2a-8a4b615df298" target="__blank"
 					class="flex justify-center items-center w-36 sm:w-48 mt-12 mb-6 sm:mb-0 text-lg border border-indigo-200 dark:border-ternary-dark py-2.5 sm:py-3 shadow-lg rounded-lg bg-indigo-50 focus:ring-1 focus:ring-indigo-900 hover:bg-indigo-500 text-blue-800 hover:text-white duration-500"
 					aria-label="Resume link">
 					<i data-feather="arrow-down-circle" class="ml-0 sm:ml-1 mr-2 sm:mr-3 w-5 sm:w-6 duration-100"></i>
-					<span class="text-sm sm:text-lg font-general-medium duration-100">CV link</span></a>
+					<span class="text-sm sm:text-lg font-general-medium duration-100">CV link</span>
+				</a>
 			</div>
 
 		</div>
