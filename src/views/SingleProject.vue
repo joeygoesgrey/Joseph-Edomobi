@@ -8,18 +8,6 @@ export default {
 	setup() {
 		const projects = ref(null);
 		const route = useRoute();
-
-		const removeLineBreaksFromAllKeys = (dataArray) => {
-			return dataArray.map(item => {
-				Object.keys(item).forEach(key => {
-					if (typeof item[key] === 'string') {
-						item[key] = item[key].replace(/\r\n/g, ' ');
-					}
-				});
-				return item;
-			});
-		};
-
 		const fetchProjectData = async () => {
 			const projectStr = route.params.str;
 
@@ -27,8 +15,7 @@ export default {
 				const data = await getPortfolioByTitle(projectStr);
 
 				if (data) {
-					projects.value = removeLineBreaksFromAllKeys(data);
-					console.log('Processed projects:', projects.value);
+					projects.value =  data;
 				}
 			} catch (error) {
 				console.error('An error occurred:', error);
