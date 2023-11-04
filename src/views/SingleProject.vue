@@ -60,7 +60,7 @@ export default {
 			</div>
 		</div>
 		<div class="grid grid-cols-1 sm:grid-cols-3 sm:gap-10 mt-12">
-			<div class="mb-10 sm:mb-0" v-for="projectImage in projects?.image_files" :key="projectImage">
+			<div class="mb-10 sm:mb-0" v-for="projectImage in projects?.image_files[0]" :key="projectImage">
 				<!-- {{ projectImage }} -->
 				<img :src="`${API_BASE_URL}/static/images/${projectImage}`" v-if="projectImage"
 					class="rounded-xl cursor-pointer shadow-lg sm:shadow-none" alt="{{ projectImage.title }}" />
