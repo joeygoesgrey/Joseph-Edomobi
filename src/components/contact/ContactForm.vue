@@ -11,7 +11,6 @@ export default {
 				subject: this.subject,
 				message: this.message,
 			};
-			console.log(formData)
 
 			try {
 				this.loading = true
