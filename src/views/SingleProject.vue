@@ -27,7 +27,7 @@ export default {
 				const data = await getPortfolioByTitle(projectStr);
 
 				if (data) {
-					projects.value = removeLineBreaksFromAllKeys(data)[0];
+					projects.value = removeLineBreaksFromAllKeys(data);
 					console.log('Processed projects:', projects.value);
 				}
 			} catch (error) {
