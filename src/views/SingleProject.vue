@@ -29,7 +29,6 @@ export default {
 
 		return {
 			projects,
-			removeLineBreaksFromAllKeys,
 			fetchProjectData,
 			API_BASE_URL
 		};
